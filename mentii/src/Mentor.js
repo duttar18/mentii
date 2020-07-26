@@ -23,15 +23,15 @@ const primary = "#3f51b5";
 const Mentor = (props) => {
     const classes = useStyles();
 
-    const { title, link, imgSrc } = props;
+    const { name, link, imgSrc } = props;
     return (
-        <Link href="/Watch" >
+        <Link href={link}>
             <Card>
                 <CardActionArea className={classes.img}>
                     <CardMedia
                         style={{ height: "150px" }}
                         image={imgSrc}
-                        title="streamer"
+                        title={name}
                     />
                 </CardActionArea>
             </Card>
@@ -40,7 +40,7 @@ const Mentor = (props) => {
                 className={classes.button}
                 variant="contained"
                 color={primary}>
-                {title}
+                {name}
             </Button>
             <Button variant="contained" color="secondary">
                 Follow
