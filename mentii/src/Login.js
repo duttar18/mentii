@@ -50,6 +50,7 @@ class Login extends React.Component {
 
     render() {
         return (
+            <PrimarySearchAppBar></PrimarySearchAppBar>
             <div>
                 {this.state.token ? (
                     <div>You are logged in!</div>
