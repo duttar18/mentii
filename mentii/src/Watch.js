@@ -42,7 +42,6 @@ class Watch extends React.Component {
                             channel={this.state.username}
                             withChat={true}
                         />
-                        <h1>{this.state.title}</h1>
                         <p>{this.state.name}</p>
                         <img src={"/uploads/" + this.state.avatar} />
                     </Content>

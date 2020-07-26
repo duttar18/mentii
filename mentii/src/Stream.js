@@ -2,12 +2,18 @@ import React from "react";
 import * as qs from "query-string";
 import { Button, Typography } from "@material-ui/core";
 import styled from "styled-components";
+import PrimarySearchAppBar from "./Appbar";
+import Footer from "./Footer";
 const Link = styled.a`
     text-decoration: none;
     color: white;
 `;
+const Linktwo = styled.a`
+    text-decoration: none;
+    color: black;
+`;
 const Content = styled.div`
-    margin-left: 400px;
+    margin-left: 500px;
     margin-top: 300px;
 `;
 const primary = "#3f51b5";
@@ -88,6 +94,8 @@ class Stream extends React.Component {
     render() {
         return (
             <div>
+                <PrimarySearchAppBar />
+
                 {this.state.token ? (
                     <Content>
                         {this.state.live ? (
@@ -98,7 +106,8 @@ class Stream extends React.Component {
                                 <Button
                                     variant="contained"
                                     color={primary}
-                                    onClick={this.endstream}>
+                                    onClick={this.endstream}
+                                    style={{ marginRight: "15px" }}>
                                     <Typography variant="h4">
                                         Click Here to End Live
                                     </Typography>
@@ -117,7 +126,8 @@ class Stream extends React.Component {
                                 <Button
                                     variant="contained"
                                     color={primary}
-                                    onClick={this.stream}>
+                                    onClick={this.stream}
+                                    style={{ marginRight: "15px" }}>
                                     <Typography variant="h4">
                                         Start Streaming On Mentii!
                                     </Typography>
@@ -131,8 +141,23 @@ class Stream extends React.Component {
                         )}
                     </Content>
                 ) : (
-                    <a href={this.state.link}>Login</a>
+                    <Content>
+                        <Button
+                            variant="contained"
+                            color={primary}
+                            style={{ marginRight: "15px" }}>
+                            <Typography variant="h4">
+                                <Linktwo href={this.state.link}>Login</Linktwo>
+                            </Typography>
+                        </Button>
+                        <Button variant="contained" color="secondary">
+                            <Typography variant="h4">
+                                <Link href="/Home">Home</Link>
+                            </Typography>
+                        </Button>
+                    </Content>
                 )}
+                <Footer />
             </div>
         );
     }

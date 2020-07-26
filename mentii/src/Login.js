@@ -2,13 +2,19 @@ import React from "react";
 import * as qs from "query-string";
 import { Button, Typography } from "@material-ui/core";
 import PrimarySearchAppBar from "./Appbar";
+import Footer from "./Footer";
+
 import styled from "styled-components";
 const Link = styled.a`
     text-decoration: none;
     color: white;
 `;
+const Linktwo = styled.a`
+    text-decoration: none;
+    color: black;
+`;
 const Content = styled.div`
-    margin-left: 400px;
+    margin-left: 605px;
     margin-top: 300px;
 `;
 const primary = "#3f51b5";
@@ -62,15 +68,20 @@ class Login extends React.Component {
     render() {
         return (
             <div>
-                <PrimarySearchAppBar></PrimarySearchAppBar>
+                <PrimarySearchAppBar />
                 <Content>
                     {this.state.token ? (
                         <Typography variant="h4">You are logged in!</Typography>
                     ) : (
                         <div>
-                            <Button variant="contained" color={primary}>
+                            <Button
+                                variant="contained"
+                                color={primary}
+                                style={{ marginRight: "15px" }}>
                                 <Typography variant="h4">
-                                    <Link href={this.state.link}>Login</Link>
+                                    <Linktwo href={this.state.link}>
+                                        Login
+                                    </Linktwo>
                                 </Typography>
                             </Button>
                             <Button variant="contained" color="secondary">
@@ -81,6 +92,7 @@ class Login extends React.Component {
                         </div>
                     )}
                 </Content>
+                <Footer />
             </div>
         );
     }
