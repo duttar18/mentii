@@ -21,7 +21,6 @@ function App() {
                     <Route path="/Stream" component={Stream} />
                 </Switch>
             </Router>
-            hi
         </React.Fragment>
     );
 }

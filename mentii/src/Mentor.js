@@ -8,25 +8,21 @@ import Typography from "@material-ui/core/Typography";
 import Header from "./Header";
 import Content from "./Content";
 
-const Mentor = () => {
+const Mentor = (props) => {
+    const { title, description, imgSrc } = props;
     return (
         <div>
             <Card style={{ marginTop: "100px" }}>
                 <CardActionArea>
                     <CardMedia
-                        style={{ height: "100px" }}
-                        image="/static/images/cards.jpg"
+                        style={{ height: "150px" }}
+                        image={imgSrc}
                         title="streamer"
                     />
-                    <CardContent>
-                        <Typography gutterBottom variant="h5" component="h2">
-                            Streamer 1
-                        </Typography>
-                    </CardContent>
                 </CardActionArea>
                 <CardActions>
                     <Button variant="contained" color="secondary">
-                        Watch Stream
+                        {title}
                     </Button>
                 </CardActions>
             </Card>

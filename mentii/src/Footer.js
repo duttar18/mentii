@@ -13,7 +13,7 @@ const Wrapper = styled.section`
 const Text = styled.p`
     color: white;
     float: left;
-    margin-left: 150px;
+    margin-left: 200px;
     font-size: 10px;
 `;
 const Footer = () => (
