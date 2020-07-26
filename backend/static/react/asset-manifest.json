@@ -1,36 +1,22 @@
 {
   "files": {
     "main.css": "/static/react/css/main.edefc261.chunk.css",
-<<<<<<< HEAD
-    "main.js": "/static/react/js/main.9e2a8cec.chunk.js",
-    "main.js.map": "/static/react/js/main.9e2a8cec.chunk.js.map",
-=======
-    "main.js": "/static/react/js/main.76b29a0e.chunk.js",
-    "main.js.map": "/static/react/js/main.76b29a0e.chunk.js.map",
->>>>>>> 0301ccdbf88f595b15382964ade0000f59fffa35
+    "main.js": "/static/react/js/main.43fc0b18.chunk.js",
+    "main.js.map": "/static/react/js/main.43fc0b18.chunk.js.map",
     "runtime-main.js": "/static/react/js/runtime-main.a1c53247.js",
     "runtime-main.js.map": "/static/react/js/runtime-main.a1c53247.js.map",
-    "js/2.f368517d.chunk.js": "/static/react/js/2.f368517d.chunk.js",
-    "js/2.f368517d.chunk.js.map": "/static/react/js/2.f368517d.chunk.js.map",
+    "js/2.fc398e6f.chunk.js": "/static/react/js/2.fc398e6f.chunk.js",
+    "js/2.fc398e6f.chunk.js.map": "/static/react/js/2.fc398e6f.chunk.js.map",
     "../../templates/index.html": "/static/react/../../templates/index.html",
     "css/main.edefc261.chunk.css.map": "/static/react/css/main.edefc261.chunk.css.map",
-<<<<<<< HEAD
-    "js/2.f368517d.chunk.js.LICENSE.txt": "/static/react/js/2.f368517d.chunk.js.LICENSE.txt",
-    "precache-manifest.c7d4f6bfee93c35abbbffb7711408e01.js": "/static/react/precache-manifest.c7d4f6bfee93c35abbbffb7711408e01.js",
-=======
-    "js/2.8cd3375c.chunk.js.LICENSE.txt": "/static/react/js/2.8cd3375c.chunk.js.LICENSE.txt",
-    "precache-manifest.5ad94e6d29cb932c959fdaad8ace5aed.js": "/static/react/precache-manifest.5ad94e6d29cb932c959fdaad8ace5aed.js",
->>>>>>> 0301ccdbf88f595b15382964ade0000f59fffa35
+    "js/2.fc398e6f.chunk.js.LICENSE.txt": "/static/react/js/2.fc398e6f.chunk.js.LICENSE.txt",
+    "precache-manifest.d81153bea448ec5430e477561ef29a99.js": "/static/react/precache-manifest.d81153bea448ec5430e477561ef29a99.js",
     "service-worker.js": "/static/react/service-worker.js"
   },
   "entrypoints": [
     "js/runtime-main.a1c53247.js",
-    "js/2.f368517d.chunk.js",
+    "js/2.fc398e6f.chunk.js",
     "css/main.edefc261.chunk.css",
-<<<<<<< HEAD
-    "js/main.9e2a8cec.chunk.js"
-=======
-    "js/main.76b29a0e.chunk.js"
->>>>>>> 0301ccdbf88f595b15382964ade0000f59fffa35
+    "js/main.43fc0b18.chunk.js"
   ]
 }
