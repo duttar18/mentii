@@ -1,2 +1,5 @@
 venv
 mentii/node_modules
+backend/env
+backend/static
+.gitignore
