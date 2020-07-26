@@ -52,11 +52,13 @@ def my_watch(id):
 @app.route("/api/token",methods=["GET"])
 def login():
     token = request.args.get('token',default='',type=str)
-    if token!='':
+    if token and token!='undefined':
         flask.session['token'] = token
     if not flask.session.get('token'):
         return flask.jsonify(token = False)    
     return flask.jsonify(token = True)
+
+@app.route("/api/streams",methods=["GET"])
 
 @app.route("/api/stream",methods=["GET","POST"])
 def stream():
