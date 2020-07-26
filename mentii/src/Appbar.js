@@ -173,7 +173,7 @@ export default function PrimarySearchAppBar() {
                         <MenuIcon />
                     </IconButton>
                     <Typography className={classes.title} variant="h6" noWrap>
-                        Mentii
+                        <Link href="/Home">Mentii</Link>
                     </Typography>
                     <div className={classes.search}>
                         <div className={classes.searchIcon}>
@@ -191,6 +191,12 @@ export default function PrimarySearchAppBar() {
                     <div className={classes.grow} />
                     <div className={classes.sectionDesktop}>
                     <LogButton/>
+                    <Button>
+                        <Link href="/Stream">Stream</Link>
+                    </Button>
+                    <Button>
+                        <Link href="/Home">Home</Link>
+                    </Button>
                         <IconButton
                             aria-label="show 4 new mails"
                             color="inherit">
