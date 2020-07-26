@@ -7,7 +7,7 @@ class Login extends React.Component {
         // Initialize mutable state
         super(props);
         let cid = "oop9p00sz52axcloheko9usg5gnvto";
-        let uri = "http://localhost:5000/Login';
+        let uri = "http://localhost:5000/Login";
         let scope = "user_read";
         this.state = {
             'token' : false,
@@ -27,7 +27,7 @@ class Login extends React.Component {
         })
         .then((data) => {
             if(data.token){
-                this.props.history.push("/Welcome");
+                this.props.history.push("/Home");
             }
             this.setState(data);
         })

@@ -68,7 +68,7 @@ def login():
     data = json.loads(r_user_info.text)
     
     streamer = Streamer.query.filter_by(username=data['name']).first()
-
+    flask.session["username"] = data["name"]
     title = "Lets talk about anything!"
     if streamer:
         streamer.name=data['display_name']
@@ -84,15 +84,10 @@ def login():
 
 @app.route('/api/logout', methods=['GET'])
 def logout():
+    streamer = Streamer.query.filter_by(username=flask.session['username']).first()
+    streamer.live=False
+    db.session.commit()
     flask.session.clear()
-    if flask.session.get('username'):
-        connection = insta485.model.get_db()
-        connection.cursor().execute("update users set live  = 0 where username = ?",[flask.session["username"]]).fetchall()
-        connection.commit()
-        flask.session.clear()
-    context = {
-        "loggedin" : False
-    }
     return flask.jsonify(token = False)
 
 @app.route("/api/streams",methods=["GET"])
