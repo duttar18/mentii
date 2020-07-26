@@ -108,7 +108,7 @@ def streams():
 def stream():
     # get json file sent from front end
     if not flask.session.get('token'):
-        return flask.jsonify(live = False)
+        return flask.jsonify(live = False,token=False)
     
 
     client_id = "oop9p00sz52axcloheko9usg5gnvto"
@@ -139,7 +139,8 @@ def stream():
         "avatar":streamer.avatar,
         "title":streamer.title,
         "name":streamer.name,
-        "username":streamer.username
+        "username":streamer.username,
+        "token":True
     }
     db.session.commit()
     return flask.jsonify(**context)

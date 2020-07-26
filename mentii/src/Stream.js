@@ -56,7 +56,7 @@ class Stream extends React.Component {
         })
     }
     componentDidMount(){
-        fetch('/api/login',{
+        fetch('/api/stream',{
             credentials: 'same-origin',
             method: 'GET'
         })
