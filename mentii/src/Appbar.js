@@ -17,6 +17,7 @@ import MoreIcon from "@material-ui/icons/MoreVert";
 import LogButton from "./LogButton";
 import styled from "styled-components";
 import { Button } from "@material-ui/core";
+import Profile from "./Profile";
 const Link = styled.a`
     text-decoration: none;
     color: white;
@@ -120,7 +121,7 @@ export default function PrimarySearchAppBar() {
             transformOrigin={{ vertical: "top", horizontal: "right" }}
             open={isMenuOpen}
             onClose={handleMenuClose}>
-            <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+            <MenuItem onClick={handleMenuClose}><Link href="/Profile">Profile</Link></MenuItem>
             <MenuItem onClick={handleMenuClose}>My account</MenuItem>
         </Menu>
     );

@@ -9,6 +9,7 @@ import Watch from "./Watch"
 import Login from "./Login"
 import Stream from "./Stream";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Profile from "./Profile";
 
 import "./App.css";
 
@@ -23,6 +24,7 @@ function App() {
                     <Route path="/Home" component={Home} />
                     <Route path="/Login" component={Login} />
                     <Route path="/Stream" component={Stream} />
+                    <Route path="/Profile" component={Profile} />
                 </Switch>
             </Router>
         </React.Fragment>
