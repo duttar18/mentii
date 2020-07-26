@@ -6,10 +6,13 @@ class Stream extends React.Component {
     constructor(props) {
         // Initialize mutable state
         super(props);
-
+        let cid = "oop9p00sz52axcloheko9usg5gnvto";
+        let uri = "http://localhost:5000/Stream";
+        let scope = "user_read";
         this.state = {
-            'stream' : false,
-            'token' : false
+            'live' : false,
+            'token' : false,
+            'link' : 'https://id.twitch.tv/oauth2/authorize?client_id='+cid+'&redirect_uri='+uri+'&response_type=token&scope='+scope
         }
         this.stream = this.stream.bind(this);
         this.endstream = this.endstream.bind(this);
@@ -22,9 +25,9 @@ class Stream extends React.Component {
                 'Content-Type' : 'application/json'
             },
             body: JSON.stringify({
-                "stream" : true
+                "live" : true
             })
-        }) // send text box in the fetch box
+        })
         .then((response) => {
           if(!response.ok) throw Error(response.statusText);
           return response.json();
@@ -41,7 +44,7 @@ class Stream extends React.Component {
                 'Content-Type' : 'application/json'
             },
             body: JSON.stringify({
-                "stream" : false
+                "live" : false
             })
         }) // send text box in the fetch box
         .then((response) => {
@@ -54,15 +57,9 @@ class Stream extends React.Component {
     }
     componentDidMount(){
         const parsed = qs.parse(window.location.hash);
-        fetch('/api/stream',{
+        fetch('/api/token?token='+parsed['access_token'],{
             credentials: 'same-origin',
-            method: 'GET',
-            headers:{
-                'Content-Type' : 'application/json'
-            },
-            body: JSON.stringify({
-                "token" : parsed['access_token']
-            })
+            method: 'GET'
         })
         .then((response) => {
           if(!response.ok) throw Error(response.statusText);
@@ -78,14 +75,20 @@ class Stream extends React.Component {
             <div>
                 {this.state.token ?
                 <div>
-                    {this.state.stream ?
-                    <Button onClick={this.endstream}>Click to End Live</Button>
+                    {this.state.live ?
+                    <div>
+                        You are live!
+                        <Button onClick={this.endstream}>Click to End Live</Button>
+                    </div>                    
                     :
-                    <Button onClick={this.stream}>Click to Stream</Button>
+                    <div>
+                        You are not live
+                        <Button onClick={this.stream}>Click to Stream</Button>
+                    </div>                    
                     }
                 </div>
                 :
-                <a href="https://id.twitch.tv/oauth2/authorize?client_id=oop9p00sz52axcloheko9usg5gnvto&redirect_uri=http:://localhost:5000/Stream&response_type=token&scope=user_read">Login</a>
+                <a href={this.state.link}>Login</a>
                 }
 
             </div>

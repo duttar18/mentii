@@ -5,6 +5,7 @@ import Content from "./Content";
 import styled from "styled-components";
 import Welcome from "./Welcome";
 import Home from "./Home";
+import Watch from "./Watch"
 import Stream from "./Stream";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
@@ -17,6 +18,7 @@ function App() {
                 <Switch>
                     <Route exact path="/" component={Welcome} />
                     <Route path="/Welcome" component={Welcome} />
+                    <Route path="/Watch/:id" component={Watch} />
                     <Route path="/Home" component={Home} />
                     <Route path="/Stream" component={Stream} />
                 </Switch>

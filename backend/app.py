@@ -45,6 +45,10 @@ class Streamer(db.Model):
 def my_index():
     return render_template("index.html")
 
+@app.route('/Watch/<path:id>', methods=['GET'])
+def my_watch(id):
+    return render_template("index.html")
+
 @app.route("/api/token",methods=["GET"])
 def login():
     token = request.args.get('token',default='',type=str)
@@ -58,10 +62,7 @@ def login():
 def stream():
     # get json file sent from front end
     if not flask.session.get('token'):
-        return flask.jsonify(stream = False)
-
-    body = flask.request.get_json()
-    body['title'] = 'Come talk to me about anything!'
+        return flask.jsonify(live = False)
 
     client_id = "oop9p00sz52axcloheko9usg5gnvto"
     headers = {
@@ -74,7 +75,9 @@ def stream():
 
     streamer = Streamer.query.filter_by(username=data['name']).first()
     if flask.request.method == 'POST':
-        if body['stream']:  
+        body = flask.request.get_json()
+        body['title'] = 'Come talk to me about anything!'
+        if body['live']:  
             if streamer:
                 streamer.name=data['display_name']
                 streamer.username=data['name']
@@ -90,7 +93,13 @@ def stream():
             streamer.title=body['title']
             streamer.avatar=data['logo']
             streamer.live=False
-    context={"stream":streamer.live}
+    context={
+        "live":streamer.live,
+        "avatar":streamer.avatar,
+        "title":streamer.title,
+        "name":streamer.name,
+        "username":streamer.username
+    }
     db.session.commit()
     return flask.jsonify(**context)
 
