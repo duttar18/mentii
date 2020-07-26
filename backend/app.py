@@ -43,6 +43,7 @@ class Streamer(db.Model):
 @app.route("/Watch")
 @app.route("/Stream")
 @app.route("/Login")
+@app.route("/Profile")
 def my_index():
     return render_template("index.html")
 
