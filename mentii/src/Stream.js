@@ -1,6 +1,16 @@
 import React from "react";
-import * as qs from 'query-string';
-import { Button } from '@material-ui/core';
+import * as qs from "query-string";
+import { Button, Typography } from "@material-ui/core";
+import styled from "styled-components";
+const Link = styled.a`
+    text-decoration: none;
+    color: white;
+`;
+const Content = styled.div`
+    margin-left: 400px;
+    margin-top: 300px;
+`;
+const primary = "#3f51b5";
 
 class Stream extends React.Component {
     constructor(props) {
@@ -10,86 +20,119 @@ class Stream extends React.Component {
         let uri = "http://localhost:5000/Stream";
         let scope = "user_read";
         this.state = {
-            'live' : false,
-            'token' : false,
-            'link' : 'https://id.twitch.tv/oauth2/authorize?client_id='+cid+'&redirect_uri='+uri+'&response_type=token&scope='+scope
-        }
+            live: false,
+            token: false,
+            link:
+                "https://id.twitch.tv/oauth2/authorize?client_id=" +
+                cid +
+                "&redirect_uri=" +
+                uri +
+                "&response_type=token&scope=" +
+                scope,
+        };
         this.stream = this.stream.bind(this);
         this.endstream = this.endstream.bind(this);
     }
-    stream(){
-        fetch('/api/stream',{
-            credentials: 'same-origin',
-            method: 'POST',
-            headers:{
-                'Content-Type' : 'application/json'
+    stream() {
+        fetch("/api/stream", {
+            credentials: "same-origin",
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                "live" : true
+                live: true,
+            }),
+        })
+            .then((response) => {
+                if (!response.ok) throw Error(response.statusText);
+                return response.json();
             })
-        })
-        .then((response) => {
-          if(!response.ok) throw Error(response.statusText);
-          return response.json();
-        })
-        .then((data) => {
-            this.setState(data);
-        })
+            .then((data) => {
+                this.setState(data);
+            });
     }
-    endstream(){
-        fetch('/api/stream',{
-            credentials: 'same-origin',
-            method: 'POST',
-            headers:{
-                'Content-Type' : 'application/json'
+    endstream() {
+        fetch("/api/stream", {
+            credentials: "same-origin",
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                "live" : false
-            })
+                live: false,
+            }),
         }) // send text box in the fetch box
-        .then((response) => {
-          if(!response.ok) throw Error(response.statusText);
-          return response.json();
-        })
-        .then((data) => {
-            this.setState(data);
-        })
+            .then((response) => {
+                if (!response.ok) throw Error(response.statusText);
+                return response.json();
+            })
+            .then((data) => {
+                this.setState(data);
+            });
     }
-    componentDidMount(){
-        fetch('/api/stream',{
-            credentials: 'same-origin',
-            method: 'GET'
+    componentDidMount() {
+        fetch("/api/stream", {
+            credentials: "same-origin",
+            method: "GET",
         })
-        .then((response) => {
-          if(!response.ok) throw Error(response.statusText);
-          return response.json();
-        })
-        .then((data) => {
-            this.setState(data);
-        })
+            .then((response) => {
+                if (!response.ok) throw Error(response.statusText);
+                return response.json();
+            })
+            .then((data) => {
+                this.setState(data);
+            });
     }
 
     render() {
         return (
             <div>
-                {this.state.token ?
-                <div>
-                    {this.state.live ?
-                    <div>
-                        You are live!
-                        <Button onClick={this.endstream}>Click to End Live</Button>
-                    </div>                    
-                    :
-                    <div>
-                        You are not live
-                        <Button onClick={this.stream}>Click to Stream</Button>
-                    </div>                    
-                    }
-                </div>
-                :
-                <a href={this.state.link}>Login</a>
-                }
-
+                {this.state.token ? (
+                    <Content>
+                        {this.state.live ? (
+                            <div>
+                                <Typography variant="h1">
+                                    You are live!
+                                </Typography>
+                                <Button
+                                    variant="contained"
+                                    color={primary}
+                                    onClick={this.endstream}>
+                                    <Typography variant="h4">
+                                        Click Here to End Live
+                                    </Typography>
+                                </Button>
+                                <Button variant="contained" color="secondary">
+                                    <Typography variant="h4">
+                                        <Link href="/Home">Home</Link>
+                                    </Typography>
+                                </Button>
+                            </div>
+                        ) : (
+                            <div>
+                                <Typography variant="h1">
+                                    You are not live
+                                </Typography>
+                                <Button
+                                    variant="contained"
+                                    color={primary}
+                                    onClick={this.stream}>
+                                    <Typography variant="h4">
+                                        Start Streaming On Mentii!
+                                    </Typography>
+                                </Button>
+                                <Button variant="contained" color="secondary">
+                                    <Typography variant="h4">
+                                        <Link href="/Home">Home</Link>
+                                    </Typography>
+                                </Button>
+                            </div>
+                        )}
+                    </Content>
+                ) : (
+                    <a href={this.state.link}>Login</a>
+                )}
             </div>
         );
     }
