@@ -1,18 +1,22 @@
 import React from "react";
-import { Card, Avatar, Button } from "@material-ui/core";
+import { Card, Button } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 import CardActionArea from "@material-ui/core/CardActionArea";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
-import Typography from "@material-ui/core/Typography";
-import Header from "./Header";
-import Content from "./Content";
+const useStyles = makeStyles({
+    button: {
+        marginRight: "20px",
+    },
+});
+const primary = "#3f51b5";
 
 const Mentor = (props) => {
+    const classes = useStyles();
+
     const { title, description, imgSrc } = props;
     return (
         <div>
-            <Card style={{ marginTop: "100px" }}>
+            <Card >
                 <CardActionArea>
                     <CardMedia
                         style={{ height: "150px" }}
@@ -20,12 +24,17 @@ const Mentor = (props) => {
                         title="streamer"
                     />
                 </CardActionArea>
-                <CardActions>
-                    <Button variant="contained" color="secondary">
-                        {title}
-                    </Button>
-                </CardActions>
             </Card>
+            <br></br>
+            <Button
+                className={classes.button}
+                variant="contained"
+                color={primary}>
+                {title}
+            </Button>
+            <Button variant="contained" color="secondary">
+                Follow
+            </Button>
         </div>
     );
 };

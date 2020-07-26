@@ -1,15 +1,16 @@
 import React from "react";
-import { Grid } from "@material-ui/core";
+import { Grid, Typography } from "@material-ui/core";
 import Mentor from "./Mentor";
 import Footer from "./Footer";
-
+import PrimarySearchAppBar from "./Appbar";
 const Home = () => {
     return (
         <div>
-            <img src="https://i.postimg.cc/tJHbwrJH/mentiilogo.png"></img>
+            <PrimarySearchAppBar></PrimarySearchAppBar>
             <Grid item container>
                 <Grid xs={0} sm={2} />
                 <Grid item xs={12} sm={8}>
+                    <Typography variant="h6" style={{ marginTop: "100px" }}> Computer Programmers</Typography>
                     <Grid container spacing={4}>
                         <Grid item xs={12} sm={4}>
                             <Mentor

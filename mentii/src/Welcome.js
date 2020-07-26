@@ -16,6 +16,8 @@ const Link = styled.a`
     text-decoration: none;
     color: white;
 `;
+const primary = "#3f51b5";
+
 const Welcome = () => {
     return (
         <Wrapper>
@@ -24,7 +26,7 @@ const Welcome = () => {
                 Menti<Colored>i</Colored>
             </Typography>
             <Typography variant="h6">Find Your Mentor</Typography>
-            <Button variant="contained" color="primary">
+            <Button variant="contained" color={primary}>
                 Log in
             </Button>
             <Button variant="contained" color="secondary">
