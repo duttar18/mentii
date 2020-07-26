@@ -11,7 +11,7 @@ const theme = createMuiTheme({
     },
     typography: {
         h1: {
-            color: "black",
+            color: "white",
         },
         h6: {
             color: "white",
