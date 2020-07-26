@@ -13,7 +13,7 @@ const Linktwo = styled.a`
     color: black;
 `;
 const Content = styled.div`
-    margin-left: 500px;
+    margin-left: 560px;
     margin-top: 300px;
 `;
 const primary = "#3f51b5";
