@@ -58,29 +58,6 @@ def login():
         flask.session['token'] = token
     if not flask.session.get('token'):
         return flask.jsonify(token = False)
-    
-    client_id = "oop9p00sz52axcloheko9usg5gnvto"
-    headers = {
-        'Accept' : 'application/vnd.twitchtv.v5+json',
-        'Client-ID' : client_id,
-        'Authorization' : 'OAuth '+ flask.session['token'],
-    }
-    r_user_info = requests.get('https://api.twitch.tv/kraken/user',headers = headers)
-    data = json.loads(r_user_info.text)
-    
-    streamer = Streamer.query.filter_by(username=data['name']).first()
-    flask.session["username"] = data["name"]
-    title = "Lets talk about anything!"
-    if streamer:
-        streamer.name=data['display_name']
-        streamer.username=data['name']
-        streamer.title=title
-        streamer.avatar=data['logo']
-        streamer.live=False
-    else:
-        streamer = Streamer(data['display_name'],data['name'],data['logo'],title,False)
-        db.session.add(streamer)
-    db.session.commit()
     return flask.jsonify(token = True)
 
 @app.route('/api/logout', methods=['GET'])
@@ -109,11 +86,11 @@ def streams():
 def getstreams():
     streamer = Streamer.query.filter_by(username=request.args.get('username')).first()
     context={
-        "live":streamer.live,
         "avatar":streamer.avatar,
         "title":streamer.title,
         "name":streamer.name,
-        "username":streamer.username
+        "username":streamer.username,
+        "live":streamer.live
     }
     return flask.jsonify(**context)
     
