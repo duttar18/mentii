@@ -62,9 +62,6 @@ def login():
 
 @app.route('/api/logout', methods=['GET'])
 def logout():
-    streamer = Streamer.query.filter_by(username=flask.session['username']).first()
-    streamer.live=False
-    db.session.commit()
     flask.session.clear()
     return flask.jsonify(token = False)
 
