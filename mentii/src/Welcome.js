@@ -26,7 +26,10 @@ const Welcome = () => {
                 Menti<Colored>i</Colored>
             </Typography>
             <Typography variant="h6">Find Your Mentor</Typography>
-            <Button variant="contained" color={primary}>
+            <Button
+                variant="contained"
+                color={primary}
+                style={{ marginRight: "15px" }}>
                 Log in
             </Button>
             <Button variant="contained" color="secondary">
