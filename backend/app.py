@@ -59,6 +59,17 @@ def login():
     return flask.jsonify(token = True)
 
 @app.route("/api/streams",methods=["GET"])
+def streams():
+    streams = Streamer.query.filter_by(live=True).all()
+    context = {
+        "streams" : []
+    }
+    for stream in streams:
+        tmp = {}
+        for column in stream.__table__.columns:
+            tmp[column.name] = str(getattr(stream, column.name))
+        context["streams"].append(tmp)
+    return flask.jsonify(**context)
 
 @app.route("/api/stream",methods=["GET","POST"])
 def stream():
