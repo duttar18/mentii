@@ -1,6 +1,12 @@
 import React from "react";
 import { TwitchEmbed } from "react-twitch-embed";
-
+import Footer from "./Footer";
+import PrimarySearchAppBar from "./Appbar";
+import styled from "styled-components";
+const Content = styled.div`
+    margin-left: 300px;
+    margin-top: 100px;
+`;
 class Watch extends React.Component {
     constructor(props) {
         super(props);
@@ -17,28 +23,33 @@ class Watch extends React.Component {
             credentials: "same-origin",
             method: "GET",
         })
-        .then((response) => {
-            if (!response.ok) throw Error(response.statusText);
-            return response.json();
-        })
-        .then((data) => {
-            this.setState(data);
-        });
+            .then((response) => {
+                if (!response.ok) throw Error(response.statusText);
+                return response.json();
+            })
+            .then((data) => {
+                this.setState(data);
+            });
     }
 
     render() {
         return (
             <React.Fragment>
-                {this.state.live ?
-                    <div>
-                        <TwitchEmbed channel={this.state.username} withChat={true} />
+                <PrimarySearchAppBar />
+                {this.state.live ? (
+                    <Content>
+                        <TwitchEmbed
+                            channel={this.state.username}
+                            withChat={true}
+                        />
                         <h1>{this.state.title}</h1>
                         <p>{this.state.name}</p>
-                        <img src={"/uploads/" + this.state.avatar}/>
-                    </div>                    
-                :
+                        <img src={"/uploads/" + this.state.avatar} />
+                    </Content>
+                ) : (
                     <div>{this.props.match.params.id} is not live</div>
-                }
+                )}
+                <Footer />
             </React.Fragment>
         );
     }
