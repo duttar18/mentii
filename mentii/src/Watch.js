@@ -19,7 +19,7 @@ class Watch extends React.Component {
         };
     }
     componentDidMount() {
-        fetch("/api/stream?username=" + this.props.match.params.id, {
+        fetch("/api/getstream?username=" + this.props.match.params.id, {
             credentials: "same-origin",
             method: "GET",
         })

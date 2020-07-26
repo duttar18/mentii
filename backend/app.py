@@ -104,6 +104,21 @@ def streams():
         context["streams"].append(tmp)
     return flask.jsonify(**context)
 
+# get others
+@app.route("/api/getstream",methods=["GET"])
+def getstreams():
+    streamer = Streamer.query.filter_by(username=request.args.get('username')).first()
+    context={
+        "live":streamer.live,
+        "avatar":streamer.avatar,
+        "title":streamer.title,
+        "name":streamer.name,
+        "username":streamer.username
+    }
+    return flask.jsonify(**context)
+    
+
+#get your own
 @app.route("/api/stream",methods=["GET","POST"])
 def stream():
     # get json file sent from front end

@@ -1,6 +1,17 @@
 import React from "react";
 import * as qs from "query-string";
-import { Button } from "@material-ui/core";
+import { Button, Typography } from "@material-ui/core";
+import PrimarySearchAppBar from "./Appbar";
+import styled from "styled-components";
+const Link = styled.a`
+    text-decoration: none;
+    color: white;
+`;
+const Content = styled.div`
+    margin-left: 400px;
+    margin-top: 300px;
+`;
+const primary = "#3f51b5";
 
 class Login extends React.Component {
     constructor(props) {
@@ -22,20 +33,20 @@ class Login extends React.Component {
     }
     componentDidMount() {
         const parsed = qs.parse(window.location.hash);
-        fetch('/api/login?token='+parsed['access_token'],{
-            credentials: 'same-origin',
-            method: 'GET'
+        fetch("/api/login?token=" + parsed["access_token"], {
+            credentials: "same-origin",
+            method: "GET",
         })
-        .then((response) => {
-          if(!response.ok) throw Error(response.statusText);
-          return response.json();
-        })
-        .then((data) => {
-            if(data.token){
-                this.props.history.push("/Home");
-            }
-            this.setState(data);
-        })
+            .then((response) => {
+                if (!response.ok) throw Error(response.statusText);
+                return response.json();
+            })
+            .then((data) => {
+                if (data.token) {
+                    this.props.history.push("/Home");
+                }
+                this.setState(data);
+            })
             .then((response) => {
                 if (!response.ok) throw Error(response.statusText);
                 return response.json();
@@ -51,11 +62,25 @@ class Login extends React.Component {
     render() {
         return (
             <div>
-                {this.state.token ? (
-                    <div>You are logged in!</div>
-                ) : (
-                    <a href={this.state.link}>Login</a>
-                )}
+                <PrimarySearchAppBar></PrimarySearchAppBar>
+                <Content>
+                    {this.state.token ? (
+                        <Typography variant="h4">You are logged in!</Typography>
+                    ) : (
+                        <div>
+                            <Button variant="contained" color={primary}>
+                                <Typography variant="h4">
+                                    <Link href={this.state.link}>Login</Link>
+                                </Typography>
+                            </Button>
+                            <Button variant="contained" color="secondary">
+                                <Typography variant="h4">
+                                    <Link href="/Home">Home</Link>
+                                </Typography>
+                            </Button>
+                        </div>
+                    )}
+                </Content>
             </div>
         );
     }
