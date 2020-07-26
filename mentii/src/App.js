@@ -6,6 +6,7 @@ import styled from "styled-components";
 import Welcome from "./Welcome";
 import Home from "./Home";
 import Watch from "./Watch"
+import Login from "./Login"
 import Stream from "./Stream";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
@@ -20,6 +21,7 @@ function App() {
                     <Route path="/Welcome" component={Welcome} />
                     <Route path="/Watch/:id" component={Watch} />
                     <Route path="/Home" component={Home} />
+                    <Route path="/Login" component={Login} />
                     <Route path="/Stream" component={Stream} />
                 </Switch>
             </Router>

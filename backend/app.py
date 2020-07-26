@@ -42,6 +42,7 @@ class Streamer(db.Model):
 @app.route("/Welcome")
 @app.route("/Watch")
 @app.route("/Stream")
+@app.route("/Login")
 def my_index():
     return render_template("index.html")
 
@@ -49,14 +50,50 @@ def my_index():
 def my_watch(id):
     return render_template("index.html")
 
-@app.route("/api/token",methods=["GET"])
+@app.route("/api/login",methods=["GET"])
 def login():
     token = request.args.get('token',default='',type=str)
     if token and token!='undefined':
         flask.session['token'] = token
     if not flask.session.get('token'):
-        return flask.jsonify(token = False)    
+        return flask.jsonify(token = False)
+    
+    client_id = "oop9p00sz52axcloheko9usg5gnvto"
+    headers = {
+        'Accept' : 'application/vnd.twitchtv.v5+json',
+        'Client-ID' : client_id,
+        'Authorization' : 'OAuth '+ flask.session['token'],
+    }
+    r_user_info = requests.get('https://api.twitch.tv/kraken/user',headers = headers)
+    data = json.loads(r_user_info.text)
+    
+    streamer = Streamer.query.filter_by(username=data['name']).first()
+
+    title = "Lets talk about anything!"
+    if streamer:
+        streamer.name=data['display_name']
+        streamer.username=data['name']
+        streamer.title=title
+        streamer.avatar=data['logo']
+        streamer.live=False
+    else:
+        streamer = Streamer(data['display_name'],data['name'],data['logo'],title,False)
+        db.session.add(streamer)
+    db.session.commit()
     return flask.jsonify(token = True)
+
+@app.route('/api/logout', methods=['GET'])
+def logout():
+    flask.session.clear()
+    if flask.session.get('username'):
+        connection = insta485.model.get_db()
+        connection.cursor().execute("update users set live  = 0 where username = ?",[flask.session["username"]]).fetchall()
+        connection.commit()
+        flask.session.clear()
+    context = {
+        "loggedin" : False
+    }
+    return flask.jsonify(token = False)
 
 @app.route("/api/streams",methods=["GET"])
 def streams():
@@ -76,6 +113,7 @@ def stream():
     # get json file sent from front end
     if not flask.session.get('token'):
         return flask.jsonify(live = False)
+    
 
     client_id = "oop9p00sz52axcloheko9usg5gnvto"
     headers = {
@@ -85,25 +123,19 @@ def stream():
     }
     r_user_info = requests.get('https://api.twitch.tv/kraken/user',headers = headers)
     data = json.loads(r_user_info.text)
-
+    
     streamer = Streamer.query.filter_by(username=data['name']).first()
+
     if flask.request.method == 'POST':
         body = flask.request.get_json()
-        body['title'] = 'Come talk to me about anything!'
         if body['live']:  
-            if streamer:
-                streamer.name=data['display_name']
-                streamer.username=data['name']
-                streamer.title=body['title']
-                streamer.avatar=data['logo']
-                streamer.live=True
-            else:
-                streamer = Streamer(data['display_name'],data['name'],data['logo'],body['title'],True)
-                db.session.add(streamer)
-        elif streamer:
             streamer.name=data['display_name']
             streamer.username=data['name']
-            streamer.title=body['title']
+            streamer.avatar=data['logo']
+            streamer.live=True
+        else:
+            streamer.name=data['display_name']
+            streamer.username=data['name']
             streamer.avatar=data['logo']
             streamer.live=False
     context={

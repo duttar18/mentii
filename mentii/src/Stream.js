@@ -56,8 +56,7 @@ class Stream extends React.Component {
         })
     }
     componentDidMount(){
-        const parsed = qs.parse(window.location.hash);
-        fetch('/api/token?token='+parsed['access_token'],{
+        fetch('/api/login',{
             credentials: 'same-origin',
             method: 'GET'
         })
