@@ -33,8 +33,36 @@ class Streamer(db.Model):
 @app.route("/Home")
 @app.route("/Welcome")
 @app.route("/Watch")
+@app.route("/Stream")
 def my_index():
     return render_template("index.html")
+
+@app.route("/api/stream",methods=["GET","POST"])
+def stream():
+    # get json file sent from front end
+    body = flask.request.get_json()
+    print(body)
+    # set token
+    if  body.get('token'):
+        flask.session['token'] = body['token']
+
+    if not flask.session.get('token'):
+        return flask.jsonify(
+            stream = False,
+            token = False
+        )
+
+    client_id = "oop9p00sz52axcloheko9usg5gnvto"
+    headers = {
+        'Accept' : 'application/vnd.twitchtv.v5+json',
+        'Client-ID' : client_id,
+        'Authorization' : 'OAuth '+ token,
+    }
+    r_user_info = requests.get('https://api.twitch.tv/kraken/user',headers = headers)
+    data = json.loads(r_user_info.text)
+    
+
+
 
 
 if __name__ == "__main__":
