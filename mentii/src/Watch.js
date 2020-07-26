@@ -3,9 +3,10 @@ import { TwitchEmbed } from "react-twitch-embed";
 import Footer from "./Footer";
 import PrimarySearchAppBar from "./Appbar";
 import styled from "styled-components";
+import { Typography } from "@material-ui/core";
 const Content = styled.div`
-    margin-left: 300px;
-    margin-top: 100px;
+    margin-left: 250px;
+    margin-top: 70px;
 `;
 class Watch extends React.Component {
     constructor(props) {
@@ -42,8 +43,7 @@ class Watch extends React.Component {
                             channel={this.state.username}
                             withChat={true}
                         />
-                        <p>{this.state.name}</p>
-                        <img src={"/uploads/" + this.state.avatar} />
+                        <Typography variant="h6">{this.state.name}</Typography>
                     </Content>
                 ) : (
                     <div>{this.props.match.params.id} is not live</div>

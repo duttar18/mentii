@@ -13,8 +13,8 @@ const Linktwo = styled.a`
     color: black;
 `;
 const Content = styled.div`
-    margin-left: 560px;
-    margin-top: 300px;
+    margin-left: 400px;
+    margin-top: 200px;
 `;
 const primary = "#3f51b5";
 
@@ -129,7 +129,7 @@ class Stream extends React.Component {
                                     onClick={this.stream}
                                     style={{ marginRight: "15px" }}>
                                     <Typography variant="h4">
-                                        Start Streaming On Mentii!
+                                        Start Streaming On Mentii
                                     </Typography>
                                 </Button>
                                 <Button variant="contained" color="secondary">
