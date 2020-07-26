@@ -14,8 +14,13 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import MailIcon from "@material-ui/icons/Mail";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import MoreIcon from "@material-ui/icons/MoreVert";
-import LogButton from "./LogButton"
-
+import LogButton from "./LogButton";
+import styled from "styled-components";
+import { Button } from "@material-ui/core";
+const Link = styled.a`
+    text-decoration: none;
+    color: white;
+`;
 const useStyles = makeStyles((theme) => ({
     grow: {
         flexGrow: 1,
@@ -190,13 +195,13 @@ export default function PrimarySearchAppBar() {
                     </div>
                     <div className={classes.grow} />
                     <div className={classes.sectionDesktop}>
-                    <LogButton/>
-                    <Button>
-                        <Link href="/Stream">Stream</Link>
-                    </Button>
-                    <Button>
-                        <Link href="/Home">Home</Link>
-                    </Button>
+                        <LogButton />
+                        <Button>
+                            <Link href="/Stream">Stream</Link>
+                        </Button>
+                        <Button>
+                            <Link href="/Home">Home</Link>
+                        </Button>
                         <IconButton
                             aria-label="show 4 new mails"
                             color="inherit">
